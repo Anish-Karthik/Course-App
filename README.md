@@ -1,15 +1,15 @@
-## Create a course selling website
+## course selling website
 
-### Description
-1. Admins should be able to sign up
-2. Admins should be able to create courses
+### Features
+1. Admins are able to sign up
+2. Admins are able to create courses
    1. Course has a title, description, price, and image link
-   2. Course should be able to be published
-3. Admins should be able to edit courses
-4. Users should be able to sign up
-5. Users should be able to purchase courses
-6. Users should be able to view purchased courses
-7. Users should be able to view all courses
+   2. Courses are able to be published
+3. Admins are able to edit courses
+4. Users are able to sign up
+5. Users are able to purchase courses
+6. Users are able to view purchased courses
+7. Users are able to view all courses
 
 ## Routes
 ### Admin Routes:
