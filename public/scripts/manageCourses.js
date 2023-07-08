@@ -1,3 +1,7 @@
+window.onload = () => {
+    getCourses();
+}
+
 function parseResponse(response) {
     console.log(response);
 }
@@ -57,24 +61,26 @@ function getCourses() {
             courseList.empty();
             courseList.append('<h1>Courses</h1>');
             courses.forEach((course) => {
-                // create a div using jquery
-                const courseDiv = $(`<div class="course" id="Course${course.id}"></div>`);
+                
+                const courseDiv = $(`<div class="card" id="Course${course.id}"></div>`);
+                const cardBody = $('<div class="card-body"></div>');
 
-                courseDiv.append(`
-                    <h3>${course.title}</h3>
-                    <p>${course.description}</p>
-                    <p>${course.price}</p>
-                    <img src="${course.imageLink}" alt="${course.title}">
+                cardBody.append(`
+                    <h2 class="course-title" >${course.title}</h3>
+                    <p class="course-description" >${course.description}</p>
+                    <p class="course-price" >Rs. ${course.price}</p>
                 `);
 
-                const editButton = $('<button id="editButton">Edit</button>');
+                const editButton = $('<button class="buttons edit-button" id="editButton">Edit</button>');
                 editButton.click(() => editCourse(course.id));
-                courseDiv.append(editButton);
+                cardBody.append(editButton);
 
-                const deleteButton = $('<button id="deleteButton">Delete</button>');
+                const deleteButton = $('<button class="buttons delete-button" id="deleteButton">Delete</button>');
                 deleteButton.click(() => deleteCourse(course.id));
-                courseDiv.append(deleteButton);
+                cardBody.append(deleteButton);
 
+                courseDiv.append(`<img class="course-image" src="${course.imageLink}" alt="${course.title}">`);
+                courseDiv.append(cardBody);
                 courseList.append(courseDiv);
             });
         });

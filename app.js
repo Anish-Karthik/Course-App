@@ -11,6 +11,8 @@ let ADMINS = [];
 let USERS = [];
 let COURSES = [];
 
+COURSES.push({id: 1, title: 'JAVA', description: 'Course 1 description', price: 399, imageLink: 'https://via.placeholder.com/150'});
+COURSES.push({id: 2, title: 'C++', description: 'Course 2 description', price: 499, imageLink: 'https://via.placeholder.com/150'});
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
