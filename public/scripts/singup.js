@@ -1,5 +1,7 @@
 function signup() {
     currentUrl = window.location.href;
+    const type = currentUrl.includes("admin")? "admin" : "user";
+    
     fetch(`${currentUrl}`, {
         method: "POST",
         headers: {

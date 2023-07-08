@@ -49,12 +49,13 @@ function deleteCourse(courseId) {
 
 function getCourses() {
     fetch('/admin/courses').then((res) => {
+
         res.json().then((data) => {
             console.log(data);
             let courses = data.courses;
-            let coursesDiv = $('#courses');
-            coursesDiv.empty();
-            coursesDiv.append('<h1>Courses</h1>');
+            let courseList = $('#courseList');
+            courseList.empty();
+            courseList.append('<h1>Courses</h1>');
             courses.forEach((course) => {
                 // create a div using jquery
                 const courseDiv = $(`<div class="course" id="Course${course.id}"></div>`);
@@ -73,6 +74,8 @@ function getCourses() {
                 const deleteButton = $('<button id="deleteButton">Delete</button>');
                 deleteButton.click(() => deleteCourse(course.id));
                 courseDiv.append(deleteButton);
+
+                courseList.append(courseDiv);
             });
         });
     });

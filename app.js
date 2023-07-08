@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 let ADMINS = [];
 let USERS = [];
@@ -28,6 +28,7 @@ app.get('/admin/login', (req, res) => {
 app.get('/admin/courses', (req, res) => {
   // logic to get all courses
   res.status(200).json({courses: COURSES});
+  console.log("courses sent successfully"); // "courses sent successfully
 });
 
 app.post('/admin/signup', (req, res) => {
@@ -59,6 +60,7 @@ app.post('/admin/courses', (req, res) => {
   const {title, description, price, imageLink} = req.body;
   const course = {id: COURSES.length + 1 ,title, description, price, imageLink};
   COURSES.push(course);
+  console.log("Course created successfully"); // "Course created successfully
   res.status(201).json({message: 'Course created successfully'});
 });
 
@@ -67,9 +69,11 @@ app.put('/admin/courses/:courseId', (req, res) => {
   const {courseId} = req.params;
   const {title, description, price, imageLink} = req.body;
   if(courseId > COURSES.length || courseId < 1) {
+    console.log("Course does not exist"); // "Course does not exist
     return res.status(400).json({message: 'Course does not exist'});
   }
   COURSES[courseId - 1] = {id: courseId, title, description, price, imageLink};
+  console.log("Course updated successfully"); // "Course updated successfully
   res.status(200).json({message: 'Course updated successfully'});
 });
 
@@ -77,9 +81,14 @@ app.delete('/admin/courses/:courseId', (req, res) => {
   // logic to delete a course
   const {courseId} = req.params;
   if(courseId > COURSES.length || courseId < 1) {
+    console.log("Course does not exist"); // "Course does not exist
     return res.status(400).json({message: 'Course does not exist'});
   }
   COURSES.splice(courseId - 1, 1);
+  for(let i = courseId - 1; i < COURSES.length; i++) {
+    COURSES[i].id--;
+  }
+  console.log("Course deleted successfully"); // "Course deleted successfully
   res.status(200).json({message: 'Course deleted successfully'});
 });
 
